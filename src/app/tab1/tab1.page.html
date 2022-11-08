@@ -1,11 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<!--
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -14,4 +7,57 @@
   </ion-header>
 
   <app-explore-container name="Tab 1 page"></app-explore-container>
+</ion-content> -->
+<ion-content [fullscreen]="true">
+<ion-list>
+  <ion-list-header class="ion-no-padding" >
+    <div style="width: 100%;" >
+      <h4 style="text-align:center;margin-top: 0.3em;">基本资料</h4>
+      <ion-avatar style="margin:0 auto;width: 7rem;height: auto;font-size: 0%;">
+        <img alt="Silhouette of a person's head" [src]="portrait" />
+      </ion-avatar>
+    <ion-item style="margin: 1px auto ;">
+      <ion-label style="text-align:center ;">
+        <h2>{{empname}}</h2>
+        <p style="margin-top:5px ;">{{position}}</p>
+      </ion-label>
+    </ion-item>
+    </div>
+  </ion-list-header>
+
+  <ion-item-group>
+    <ion-item-divider color="primary">
+      <ion-label>年假</ion-label>
+    </ion-item-divider>
+    <ion-item lines="full">
+      <ion-label>全年共享年假</ion-label>
+      <ion-label style="text-align: right;">{{year_entitlement}}</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label>全年已用</ion-label>
+      <ion-label style="text-align: right;">{{year_taken}}</ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>余额</ion-label>
+      <ion-label style="text-align: right;">{{year_balance}}</ion-label>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="primary">
+      <ion-label>排班</ion-label>
+    </ion-item-divider>
+    <ion-item-group *ngFor="let item of rostList">
+      <ion-item lines="full" class="ion-no-padding" >
+        <ion-icon style="margin-left:0.4em ;" name="time-outline" ></ion-icon>
+        <ion-label style="margin-left:0.5em ;" >{{item.workdate | date:'yyyy/MM/dd EEEE'}}</ion-label>
+      </ion-item>
+      <ion-item lines="full" class="ion-no-padding">
+         <ion-label  *ngIf="item.location_name!=''"  style="margin-left:0.7em ;font-size: medium;">{{item.location_name}} | {{item.job_name}} | {{item.roster_name}}</ion-label>
+         <ion-label  else  style="margin-left:0.7em ;font-size: medium;">未排班</ion-label>
+      </ion-item>
+    </ion-item-group>
+  </ion-item-group>
+
+</ion-list>
 </ion-content>

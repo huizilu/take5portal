@@ -6,7 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
-
+import {RouteReuseService} from '../route-reuse-service.service'
+import {RouteReuseStrategy} from '@angular/router';
 @NgModule({
   imports: [
     IonicModule,
@@ -14,6 +15,7 @@ import { TabsPage } from './tabs.page';
     FormsModule,
     TabsPageRoutingModule
   ],
-  declarations: [TabsPage]
+  declarations: [TabsPage],
+  providers: [{provide: RouteReuseStrategy, useClass: RouteReuseService}],
 })
 export class TabsPageModule {}

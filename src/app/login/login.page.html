@@ -1,0 +1,18 @@
+<ion-content>
+  <div class="login_logo" style="margin-top: 5em" >
+    <img src="assets/logo_laxton.png" />
+  </div>
+  <ion-item style="padding: 0.3em;margin-top: 1em;">
+    <ion-label position="floating">UserName</ion-label>
+    <ion-input  required clear-input="true"  [(ngModel)]="username"></ion-input>
+  </ion-item>
+
+  <ion-item  style="padding:0.3em ;">
+    <ion-label position="floating">Password</ion-label>
+    <ion-input type="password"  [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <ion-button style="width: 80%;margin: 60px auto ;" expand="block" (click)="login()">登录</ion-button>
+</ion-content>
+
+

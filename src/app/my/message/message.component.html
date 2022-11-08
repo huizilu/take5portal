@@ -1,0 +1,45 @@
+<!-- <p>
+  message works!
+</p> -->
+
+<!-- <ion-nav-link router-direction="forward" [component]="component">
+  <ion-button>Go to Page Two</ion-button>
+</ion-nav-link> -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-segment value="unread" (ionChange)="handleMessageTypeChange($event)">
+      <ion-segment-button value="unread">
+        未读消息
+      </ion-segment-button>
+      <ion-segment-button value="read">
+        已读消息
+      </ion-segment-button>
+    </ion-segment>
+    <ion-buttons slot="start">
+      <ion-back-button  text='' color="light" defaultHref="tabs/my"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-nav-link  router-direction="forward"  [component]="component" *ngFor="let item of list" >
+      <ion-item class="ion-no-padding" style="paddingTop:8px ;" (click)="setMessageid(item.messageid,this)">
+          <span style="margin-left:0.5rem ;color:#5BD;width: 18%;">#{{item.messageid}}</span>
+          <ion-label text-wrap style="margin-left:0.7rem ;">
+             <h6>{{item.subject}}</h6>
+             <p> <{{item.sender_name}}>  {{item.senddate}}</p>
+          </ion-label>
+      </ion-item>
+    </ion-nav-link>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -6,6 +6,9 @@ const routes: Routes = [
   {
     path: '',
     component: Tab2Page,
+    data: {
+      reuse: true
+    }
   }
 ];
 
