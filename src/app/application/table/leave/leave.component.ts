@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Chooser } from '@awesome-cordova-plugins/chooser/ngx';
+
 @Component({
   selector: 'app-leave',
   templateUrl: './leave.component.html',
@@ -7,22 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaveComponent implements OnInit {
   public startdate:string=''
-
-  constructor() { }
+  public enddate:string
+  constructor(private chooser: Chooser) { }
 
   ngOnInit() {
-    this.startdate = new Date().toISOString();
-
   }
-  private dateValue: any;
-  public enddate:string
 
-
-  get date(): any {
-    return this.dateValue;
-  }
-  set date(value: any) {
-    console.log({ value });
-    this.dateValue = value;
+  addFile(){
+    this.chooser.getFile()
+    .then(file => console.log(file ? file.name : 'canceled'))
+    .catch((error: any) => console.error(error));
   }
 }

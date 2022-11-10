@@ -5,6 +5,7 @@ import { TablePage } from './table.page';
 import {LeaveComponent} from './leave/leave.component'
 import {AttandanceComponent} from './attandance/attandance.component'
 import {OtComponent} from './ot/ot.component'
+import { Chooser } from '@awesome-cordova-plugins/chooser/ngx';
 
 const routes: Routes = [
   {
@@ -30,5 +31,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers:[Chooser]
 })
 export class TablePageRoutingModule {}
