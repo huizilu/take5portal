@@ -5,7 +5,8 @@ import { AngularDelegate } from '@ionic/angular';
 export enum Company{
   LAXTON,
   TENTEN,
-  Sonepar
+  Sonepar,
+  Baojia
   }
 
 @Injectable({
@@ -14,7 +15,7 @@ export enum Company{
 export class CommonService {
 
   public company:Company
-  = Company.TENTEN
+  = Company.Baojia
 
   public  config: any = {
     domain: ''
@@ -35,6 +36,10 @@ export class CommonService {
 
     case Company.TENTEN:
       this.config.domain = 'https://take5.10over10.com.tw/10over10_api'
+      break;
+
+    case Company.Baojia:
+      this.config.domain = 'http://121.40.177.38/API/'
       break;
 
       default:

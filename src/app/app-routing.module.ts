@@ -20,6 +20,14 @@ const routes: Routes = [
  {
     path:'message',
     loadChildren: () => import('./my/message/message.module').then( m => m.MessagePageModule)
+  },
+  {
+    path:'workflowlist',
+    loadChildren: () => import('./my/workflowlist/workflowlist.module').then( m => m.WorkflowlistPageModule)
+  },
+  {
+    path: 'table',
+    loadChildren: () => import('./application/table/table.module').then( m => m.TablePageModule)
   }
 ];
 @NgModule({

@@ -15,20 +15,24 @@ export class Tab1Page implements OnInit{
   public year_taken = 0
   public year_balance = 0
   public portrait:string=''
+   public loading:boolean=false
 
-  constructor(public http:CommonService,private loadingCtrl: LoadingController) {
+  constructor(public http:CommonService,private loadingCtrl: LoadingController) {}
 
-  }
   ngOnInit() {
     console.log('ngonit tab1')
     this.showLoading()
-    this.getEmployeeInfo()
   }
+
   async showLoading() {
     const loading = await this.loadingCtrl.create({
       message: 'Waiting',
     });
     loading.present();
+    loading.addEventListener('ionLoadingDidPresent', (event: any) => {
+      console.log('ionLoadingDidPresent')
+      this.getEmployeeInfo()
+    });
   }
 
   getEmployeeInfo(){
@@ -44,8 +48,11 @@ export class Tab1Page implements OnInit{
       this.empname=data.EmpInfo.empname
       this.position=data.Position.positionname
       this.portrait = data.EmpInfo.portrait!=""?data.EmpInfo.portrait:'https://ionicframework.com/docs/img/demos/avatar.svg'
-    },(error=>{
+    },(
+      error=>{
       this.loadingCtrl.dismiss()
+      console.log('getEmployeeInfo error')
     }))
   }
+
 }

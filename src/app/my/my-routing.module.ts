@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: '',
     component: MyPage
+  },
+  {
+    path: 'workflowlist',
+    loadChildren: () => import('./workflowlist/workflowlist.module').then( m => m.WorkflowlistPageModule)
   }
 ]
 

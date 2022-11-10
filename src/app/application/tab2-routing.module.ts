@@ -9,6 +9,10 @@ const routes: Routes = [
     data: {
       reuse: true
     }
+  },
+  {
+    path: 'table',
+    loadChildren: () => import('./table/table.module').then( m => m.TablePageModule)
   }
 ];
 

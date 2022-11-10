@@ -10,7 +10,9 @@ import { NavController} from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  constructor(public http:CommonService, public nav:NavController) { }
+  constructor(public http:CommonService, public nav:NavController) {
+
+  }
   public username:string
   public password:string
 

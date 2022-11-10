@@ -1,0 +1,49 @@
+<ion-content class="ion-padding">
+  <ion-item lines="full">
+    <ion-label>休假类型</ion-label>
+    <ion-select  placeholder="Select One">
+      <ion-select-option value="bacon">Bacon</ion-select-option>
+      <ion-select-option value="onions">Onions</ion-select-option>
+      <ion-select-option value="pepperoni">Pepperoni</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label>开始日期</ion-label>
+    <ion-datetime-button datetime="datetime"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+             <ion-datetime id="datetime"
+                    presentation="date"
+                    [ngModel]="startdate">
+            </ion-datetime>
+          </ng-template>
+    </ion-modal>
+  </ion-item>
+
+
+  <div>
+  <ion-item>
+    <ion-label>Pick date</ion-label>
+    <ion-input
+      value="{{ date | date: 'dd.MM.yyyy' }}"
+      id="date"
+      class="ion-text-end"
+    ></ion-input>
+    <ion-popover trigger="date" size="cover">
+      <ng-template>
+        <ion-datetime
+          presentation="date"
+          [(ngModel)]="date"
+          locale="sl-SI"
+        ></ion-datetime>
+      </ng-template>
+    </ion-popover>
+  </ion-item>
+</div>
+
+<ion-item >
+  <ion-label>结束日期</ion-label>
+  <input type="date" ngModel="enddate" />
+</ion-item>
+</ion-content>

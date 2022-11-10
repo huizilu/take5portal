@@ -1,7 +1,7 @@
 import { Component, OnInit,Input,OnDestroy} from '@angular/core';
 import {CommonService} from '../../../common.service';
 import {MessageComponent} from '../../message/message.component'
-import { AlertController,IonNav } from '@ionic/angular';
+import { AlertController,IonNav,NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-messagecontent',
@@ -21,6 +21,7 @@ export class MessagecontentComponent implements OnInit,OnDestroy{
 
   constructor(public http:CommonService,
     public alertController:AlertController,
+    public navcon:NavController,
     public nav:IonNav) {
 
    }
@@ -108,7 +109,9 @@ export class MessagecontentComponent implements OnInit,OnDestroy{
       buttons: [{
         text:'OK',
         handler:()=>{
+          //都可以跳转
          this.nav.popToRoot()
+        // this.navcon.navigateRoot('message')
         }
      }],
     });

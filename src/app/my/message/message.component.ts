@@ -2,6 +2,7 @@ import{MessagecontentComponent} from './messagecontent/messagecontent.component'
 import { Component, EventEmitter, OnInit,ViewChild} from '@angular/core';
 import { IonContent, IonInfiniteScroll,LoadingController } from '@ionic/angular';
 import {CommonService} from '../../common.service';
+
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
