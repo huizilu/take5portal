@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar  color="primary">
-    <ion-title>休假申请</ion-title>
+    <ion-title >休假申请</ion-title>
     <ion-buttons slot="start">
       <ion-button routerLink="/tabs/tab2" routerDirection="back">返回</ion-button>
     </ion-buttons>
@@ -13,40 +13,76 @@
 <ion-content class="ion-padding">
   <ion-item lines="full">
     <ion-label>休假类型</ion-label>
-    <ion-select  placeholder="Select One">
-      <ion-select-option value="bacon">Bacon</ion-select-option>
-      <ion-select-option value="onions">Onions</ion-select-option>
-      <ion-select-option value="pepperoni">Pepperoni</ion-select-option>
+    <ion-select interface="popover" (ionChange)="handleChange($event)"
+     placeholder="Select One" *ngIf="leavetypes!=[]">
+      <ion-select-option  *ngFor="let item of leavetypes"
+          [value]="item">{{item.name}}
+      </ion-select-option>
     </ion-select>
   </ion-item>
 
-  <ion-item lines="full">
+  <ion-item lines="full" [disabled]="cleavetype==undefined">
     <ion-label>开始日期</ion-label>
     <ion-label  style="text-align:right;" id="open-custom-dialog">
-      {{startdate | date: 'yyyy/MM/dd' }} &nbsp;</ion-label>
+      {{startdate | date: 'yyyy/MM/dd' }} &nbsp;
+      <ion-icon style="color:#006EE2;font-size:1.3rem ;"
+      slot="end"
+       name="calendar-outline"></ion-icon>
+    </ion-label>
     <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
      <ng-template>
-       <div class="wrapper">
+       <div class="wrapper" >
          <ion-datetime
+         id="wd_startdate"
+         (ionBlur)="startDateChange()"
          presentation="date"
          [(ngModel)]="startdate">
        </ion-datetime>
        </div>
      </ng-template>
    </ion-modal>
+
  </ion-item>
 
- <ion-item lines="full">
+
+ <ion-item lines="full" *ngIf="cleavetype?cleavetype.ishourly:false" disabled="false">
+  <ion-label>开始时间</ion-label>
+  <ion-label  style="text-align:right;" id="open-custom-starttime-dialog">
+    {{starttime | date: 'HH:mm' }} &nbsp;</ion-label>
+  <!-- <ion-modal id="example-modal2" #modal trigger="open-custom-starttime-dialog">
+   <ng-template>
+     <div class="wrapper" >
+       <ion-datetime
+       id="wd_starttime"
+       (ionBlur)="startTimeChange()"
+       presentation="time"
+       [(ngModel)]="starttime">
+     </ion-datetime>
+     </div>
+   </ng-template>
+ </ion-modal> -->
+ <input type="time" id="wd_starttime" name="appt" (change)="starttimechange($event)"
+ style="margin-right: 10px;"
+        min="09:00" max="18:00" required>
+</ion-item>
+
+
+ <ion-item lines="full" *ngIf="cleavetype?!cleavetype.ishourly:true" disabled="true">
   <ion-checkbox ></ion-checkbox>
   <ion-label>上午</ion-label>
   <ion-checkbox ></ion-checkbox>
   <ion-label>下午</ion-label>
 </ion-item>
 
-<ion-item lines="full">
+<ion-item lines="full" disabled="true">
   <ion-label>结束日期</ion-label>
   <ion-label  style="text-align:right;" id="open-custom-dialog2">
-    {{enddate | date: 'yyyy/MM/dd' }} &nbsp;</ion-label>
+    {{enddate | date: 'yyyy/MM/dd' }} &nbsp;
+    <ion-icon style="color:#006EE2;font-size:1.3rem ;"
+       slot="end"
+       name="calendar-outline">
+     </ion-icon>
+  </ion-label>
   <ion-modal id="example-modal" #modal trigger="open-custom-dialog2">
    <ng-template>
      <div class="wrapper">
@@ -59,7 +95,23 @@
  </ion-modal>
 </ion-item>
 
-<ion-item lines="full">
+<ion-item lines="full"  *ngIf="cleavetype? cleavetype.ishourly:false" disabled="true">
+  <ion-label>结束时间</ion-label>
+  <ion-label  style="text-align:right;" id="open-custom-endtime-dialog">
+    {{endtime | date: 'HH:mm' }} &nbsp;</ion-label>
+  <ion-modal id="example-modal" #modal trigger="open-custom-endtime-dialog">
+   <ng-template>
+     <div class="wrapper">
+       <ion-datetime
+       presentation="time"
+       [(ngModel)]="endtime">
+     </ion-datetime>
+     </div>
+   </ng-template>
+ </ion-modal>
+</ion-item>
+
+<ion-item lines="full" *ngIf="cleavetype?!cleavetype.ishourly:true" disabled="true">
      <ion-checkbox ></ion-checkbox>
      <ion-label>上午</ion-label>
      <ion-checkbox ></ion-checkbox>
@@ -75,4 +127,16 @@
   <ion-label>时数</ion-label>
   <ion-label style="text-align: center;">8</ion-label>
 </ion-item>
+
+<ion-item lines="full">
+     <ion-label>请假事由</ion-label>
+</ion-item>
+
+<ion-item lines="full">
+  <ion-textarea></ion-textarea>
+</ion-item>
+
+<ion-button expand="block">提交</ion-button>
+
+<ion-item-divider></ion-item-divider>
 </ion-content>

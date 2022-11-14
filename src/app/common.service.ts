@@ -6,7 +6,8 @@ export enum Company{
   LAXTON,
   TENTEN,
   Sonepar,
-  Baojia
+  Baojia,
+  TEST
   }
 
 @Injectable({
@@ -42,6 +43,10 @@ export class CommonService {
       this.config.domain = 'http://121.40.177.38/API/'
       break;
 
+    case Company.TEST:
+      this.config.domain = 'http://demo.take5people.net/APITest7MC'
+      break;
+
       default:
     }
   }
@@ -60,6 +65,27 @@ export class CommonService {
     };
     return new Promise((resove, reject) => {
       this.http.get(api,httpOptions).subscribe((response) => {
+        resove(response);
+      }, (error) => {
+        reject(error);
+      })
+    })
+  }
+
+
+    /*
+  api/focus
+  */
+  ajaxPost(url:String,params1?:any) {
+    var api = this.config.domain + url;
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':localStorage.getItem('Token')
+      }
+     ),
+    };
+    return new Promise((resove, reject) => {
+      this.http.post(api,params1,httpOptions).subscribe((response) => {
         resove(response);
       }, (error) => {
         reject(error);

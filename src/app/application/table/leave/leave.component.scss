@@ -5,7 +5,13 @@ ion-modal#example-modal {
   --border-radius: 6px;
   --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
 }
-
+ion-modal#example-modal2 {
+  --width: fit-content;
+  --min-width: 250px;
+  --height: fit-content;
+  --border-radius: 6px;
+  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
 // ion-modal#example-modal h1 {
 //   margin: 20px 20px 10px 20px;
 // }
@@ -21,3 +27,11 @@ ion-modal#example-modal {
 // ion-modal#example-modal .wrapper {
 //   margin-bottom: 10px;
 // }
+
+ion-label{
+  font-size: 1rem !important;
+}
+
+input{
+  border-width: 0;
+}
