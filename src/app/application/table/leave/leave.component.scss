@@ -12,6 +12,20 @@ ion-modal#example-modal2 {
   --border-radius: 6px;
   --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
 }
+ion-modal#example-modal3 {
+  --width: fit-content;
+  --min-width: 250px;
+  --height: fit-content;
+  --border-radius: 6px;
+  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
+ion-modal#example-modal4 {
+  --width: fit-content;
+  --min-width: 250px;
+  --height: fit-content;
+  --border-radius: 6px;
+  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
 // ion-modal#example-modal h1 {
 //   margin: 20px 20px 10px 20px;
 // }
@@ -34,4 +48,25 @@ ion-label{
 
 input{
   border-width: 0;
+}
+input[type=time] {
+  background-color:transparent;
+  FILTER: alpha(opacity=0); /*androd*/
+  appearance:none;  /*下拉框去掉右侧图标*/
+  -moz-appearance:none;
+  -webkit-appearance:none;
+}
+
+
+#wd_autual_starttime{
+  --border-color: #006EE2;
+}
+#wd_cb_fromdate{
+  --border-color: #006EE2;
+}
+#wd_cb_todate{
+  --border-color: #006EE2;
+}
+span{
+  font-size: 1.03rem !important;
 }

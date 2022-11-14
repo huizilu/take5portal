@@ -11,11 +11,12 @@ import { format } from 'date-fns';
   styleUrls: ['./leave.component.scss'],
 })
 export class LeaveComponent implements OnInit,AfterViewInit {
-  public startdate:string=''
-  public enddate:string
+  public startdate:string=undefined
+  public enddate:string=undefined
   public starttime:string=''
   public endtime:string
   public cleavetype = undefined;
+  public leavecalc =undefined;
 
   public wd_startdate;
   public wd_starttime;
@@ -89,20 +90,16 @@ export class LeaveComponent implements OnInit,AfterViewInit {
   public startDateChange(){
     this.wd_startdate = document.getElementById('wd_startdate')
     console.log('开始日期',this.wd_startdate.value)
-    // this.postT5pDayCount()
+    this.postT5pDayCount('wd_startdate',this.wd_startdate.value)
   }
-
-  public startTimeChange(){
-    this.wd_starttime = document.getElementById('wd_starttime')
-    console.log('开始时间',this.wd_starttime.value)
-  }
-
 
   starttimechange(event){
     this.wd_starttime = document.getElementById('wd_starttime')
     console.log('开始时间',this.wd_starttime.value)
   }
-  postT5pDayCount(){
+
+  postT5pDayCount(wd:string,data:string){
+    console.log(wd,data)
     let postdata={
       leavecode:'',
       specifyfromdate:'',
@@ -112,19 +109,47 @@ export class LeaveComponent implements OnInit,AfterViewInit {
       todatemorning:true,
       todateafternoon:true
     }
-    //按天休假
     if(!this.cleavetype.ishourly){
-      if(this.enddate==undefined){
-        this.enddate=this.startdate
+      postdata.leavecode = this.cleavetype.leavecode
+      if(this.startdate!=undefined){
+        postdata.specifyfromdate = format(new Date(this.startdate),'yyyy-MM-dd')
       }
-      postdata.leavecode = this.cleavetype.leavecode,
-      postdata.specifyfromdate = format(new Date(this.startdate),'yyyy-MM-dd')
+      if(this.enddate!=undefined){
       postdata.specifytodate = format(new Date(this.enddate),'yyyy-MM-dd')
+      }
+    }
+    if(wd=='wd_startdate'){
+      postdata.specifyfromdate = format(new Date(data),'yyyy-MM-dd')
+      if(this.enddate==undefined){
+      postdata.specifytodate = format(new Date(data),'yyyy-MM-dd')
+      }
     }
     this.http.ajaxPost('/api/leavecalc',postdata).then((res:any)=>{
       console.log('postT5pDayCount',res)
+      this.leavecalc = res
+      this.startdate=res.specifyfromdate
+      this.enddate =res.specifytodate
+    },error=>{
+      console.log('postT5pDayCount error',JSON.stringify(error))
+    })
+  }
+
+  public file;
+  onFileChange(fileChangeEvent) {
+    this.file = fileChangeEvent.target.files[0];
+  }
+
+  async submitForm() {
+    let formData = new FormData();
+    formData.append("Attachment_" + 0, this.file, this.file.name);
+    this.leavecalc.leavecode=this.cleavetype.leavecode
+    formData.append("leaveinfo",JSON.stringify(this.leavecalc))
+    this.http.ajaxPost("/api/EmpLeave/PostLeaveWithAttachment", formData).then(res=>{
+      console.log(res)
     },error=>{
 
     })
   }
+
+
 }
