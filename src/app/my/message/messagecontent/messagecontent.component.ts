@@ -13,8 +13,8 @@ export class MessagecontentComponent implements OnInit,OnDestroy{
   @Input() messageid:string
   @Input() parentView:MessageComponent
   public sender:string
-  public To:[]
-  public Cc:[]
+  public To:[{empname:''}]
+  public Cc:[{empname:''}]
   public senddate:string
   public messageidtxt:string
   public subject:string

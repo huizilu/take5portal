@@ -8,14 +8,15 @@ import { TablePageRoutingModule } from './table-routing.module';
 
 import { TablePage } from './table.page';
 import { LeaveComponent } from './leave/leave.component';
+import { OtComponent } from './ot/ot.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicModule.forRoot(),
     TablePageRoutingModule
   ],
-  declarations: [TablePage,LeaveComponent]
+  declarations: [TablePage,LeaveComponent,OtComponent]
 })
 export class TablePageModule {}

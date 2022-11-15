@@ -37,7 +37,7 @@ export class LeaveComponent implements OnInit,AfterViewInit {
 
   }
 
-  public leavetypes:[];
+  public leavetypes:[{name:''}];
 
   ngOnInit() {
     this.showLoading()
@@ -60,16 +60,19 @@ export class LeaveComponent implements OnInit,AfterViewInit {
       this.leavetypes=res.LeaveTypes
       this.loadingCtrl.dismiss()
     },error=>{
-      alert(error)
+      console.log(error)
+      alert(error.error.error_msg?error.error.error_msg:JSON.stringify(error))
       this.loadingCtrl.dismiss()
     })
   }
+  private files=[]
 
   addFile(){
     this.chooser.getFile()
     .then(
       file => {
       console.log(file ? file.name : 'canceled')
+      this.files.push(file)
     })
     .catch((error: any) => console.error(error));
   }

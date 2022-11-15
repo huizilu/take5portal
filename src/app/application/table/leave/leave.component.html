@@ -14,7 +14,7 @@
   <ion-item lines="full">
     <ion-label>休假类型</ion-label>
     <ion-select interface="popover" (ionChange)="handleChange($event)"
-     placeholder="Select One" *ngIf="leavetypes!=[]">
+     placeholder="Select One" >
       <ion-select-option  *ngFor="let item of leavetypes"
           [value]="item">{{item.name}}
       </ion-select-option>

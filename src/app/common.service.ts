@@ -16,10 +16,13 @@ export enum Company{
 export class CommonService {
 
   public company:Company
-  = Company.Baojia
+  = Company.TENTEN
 
   public  config: any = {
     domain: ''
+  }
+  public getcompany(){
+    return this.company;
   }
 
   constructor(public http: HttpClient) {
@@ -54,7 +57,7 @@ export class CommonService {
   /*
   api/focus
   */
-  ajaxGet(url:String,params1?:any) {
+  async ajaxGet(url:String,params1?:any) {
     var api = this.config.domain + url;
     var httpOptions = {
       headers: new HttpHeaders({
@@ -63,7 +66,7 @@ export class CommonService {
      ),
      params:params1
     };
-    return new Promise((resove, reject) => {
+    return await new Promise((resove, reject) => {
       this.http.get(api,httpOptions).subscribe((response) => {
         resove(response);
       }, (error) => {
@@ -76,7 +79,7 @@ export class CommonService {
     /*
   api/focus
   */
-  ajaxPost(url:String,params1?:any) {
+  async ajaxPost(url:String,params1?:any) {
     var api = this.config.domain + url;
     var httpOptions = {
       headers: new HttpHeaders({
@@ -84,7 +87,7 @@ export class CommonService {
       }
      ),
     };
-    return new Promise((resove, reject) => {
+    return await new Promise((resove, reject) => {
       this.http.post(api,params1,httpOptions).subscribe((response) => {
         resove(response);
       }, (error) => {
@@ -96,7 +99,7 @@ export class CommonService {
     /*
   api/focus
   */
-  ajaxDelete(url:String,params1?:any) {
+  async ajaxDelete(url:String,params1?:any) {
     var api = this.config.domain + url;
     var httpOptions = {
       headers: new HttpHeaders({
@@ -105,8 +108,8 @@ export class CommonService {
      ),
      params:params1
     };
-    return new Promise((resove, reject) => {
-      this.http.delete(api,httpOptions).subscribe((response) => {
+    return await new Promise((resove, reject) => {
+       this.http.delete(api,httpOptions).subscribe((response) => {
         resove(response);
       }, (error) => {
         reject(error);
@@ -116,7 +119,7 @@ export class CommonService {
   /*
  api/focus
  */
-  ajaxLoginPost(url:String,username:string,password:string) {
+ async ajaxLoginPost(url:String,username:string,password:string) {
     var httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded'
@@ -131,7 +134,7 @@ export class CommonService {
       }
   });
     var api = this.config.domain + url;
-    return new Promise((resove, reject) => {
+    return await new Promise((resove, reject) => {
       this.http.post(api, params ,httpOptions).subscribe((response) => {
         resove(response)
         // console.log(response)

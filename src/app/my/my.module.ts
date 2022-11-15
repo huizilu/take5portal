@@ -12,7 +12,7 @@ import { MyPage } from './my.page';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicModule.forRoot(),
     MyPageRoutingModule
   ],
   declarations: [MyPage]

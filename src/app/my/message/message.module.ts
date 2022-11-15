@@ -15,7 +15,7 @@ import {CommonService} from '../../common.service';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicModule.forRoot(),
     MessagePageRoutingModule,
     HttpClientModule
   ],
